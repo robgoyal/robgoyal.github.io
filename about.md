@@ -3,28 +3,14 @@ layout: page
 title: About
 ---
 
+Hello and welcome to my blog! I am a software developer from self study and an aspiring engineering by education who loves to read, play video games and procastinate at working out. I will be interning at [General Dynamics Mission Systems](https://gdmissionsystems.com/) for the 2017 Fall term while actively looking for an internship for the January term as well. 
+
+I'm currently a student studying [Mechatronics Engineering](http://www.cas.mcmaster.ca/cas/0template1.php?902) and [Management](http://www.eng.mcmaster.ca/engandmgt/) at McMaster University. I'm constantly asked what Mechatronics Engineering is about and the short answer I give is robotics. The [Wikipedia](https://en.wikipedia.org/wiki/Mechatronics) definition is as follows:
+
 <p class="message">
-  Hey there! This page is included as an example. Feel free to customize it for your own use upon downloading. Carry on!
+    Mechatronics is a multidisciplinary field of science that includes a combination of mechanical engineering, electronics, computer engineering, telecommunications engineer, systems engineering and control engineering.
 </p>
 
-In the novel, *The Strange Case of Dr. Jeykll and Mr. Hyde*, Mr. Poole is Dr. Jekyll's virtuous and loyal butler. Similarly, Poole is an upstanding and effective butler that helps you build Jekyll themes. It's made by [@mdo](https://twitter.com/mdo).
+Management provides an additional year of studies including core business concepts and its integration within engineering. 
 
-There are currently two themes built on Poole:
-
-* [Hyde](http://hyde.getpoole.com)
-* [Lanyon](http://lanyon.getpoole.com)
-
-Learn more and contribute on [GitHub](https://github.com/poole).
-
-## Setup
-
-Some fun facts about the setup of this project include:
-
-* Built for [Jekyll](http://jekyllrb.com)
-* Developed on GitHub and hosted for free on [GitHub Pages](https://pages.github.com)
-* Coded with [Sublime Text 2](http://sublimetext.com), an amazing code editor
-* Designed and developed while listening to music like [Blood Bros Trilogy](https://soundcloud.com/maddecent/sets/blood-bros-series)
-
-Have questions or suggestions? Feel free to [open an issue on GitHub](https://github.com/poole/issues/new) or [ask me on Twitter](https://twitter.com/mdo).
-
-Thanks for reading!
+This was just a brief overview of myself so if you'd like to learn more, check out my blog post discussing several aspects of what I hope to achieve from this blog, my career goals and more. You could check out my blog for some more of my ramblings or my resume for an overview of my career. 
