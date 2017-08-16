@@ -11,6 +11,6 @@ I'm currently a student studying [Mechatronics Engineering](http://www.cas.mcmas
     Mechatronics is a multidisciplinary field of science that includes a combination of mechanical engineering, electronics, computer engineering, telecommunications engineer, systems engineering and control engineering.
 </p>
 
-Management provides an additional year of studies including core business concepts and its integration within engineering. 
+In essence, Mechatronics focuses on the assimilation of mechanical, electrical, and software and the communication between these disciplines. Management provides an additional year of studies including core business concepts and its integration within engineering. 
 
-This was just a brief overview of myself so if you'd like to learn more, check out my blog post discussing several aspects of what I hope to achieve from this blog, my career goals and more. You could check out my blog for some more of my ramblings or my resume for an overview of my career. 
+This was just a brief overview of myself so if you'd like to learn more, check out my blog post discussing several aspects of what I hope to achieve from this blog, my career goals and more. You could check out my <a href="{{ site.baseurl }}/">blog</a> for some more of my ramblings or my <a href="{{ site.baseurl }}/public/docs/resume_cv.pdf">resume</a> for an overview of my career. 
