@@ -6,7 +6,7 @@ permalink:           pretty
 # Setup
 title:               Robin Goyal
 tagline:             'Developer, Engineer, Student'
-description:         'Thoughts, discussions, and notes about the unending journey in software development'
+description:         'Thoughts, discussions, and notes about the never ending journey in software development'
 url:                 http://lanyon.getpoole.com
 baseurl:             ''
 
@@ -22,3 +22,6 @@ author:
 
 # Custom vars
 version:             1.0.0
+
+# Excerpt Seperator
+excerpt_separator: <!--more-->

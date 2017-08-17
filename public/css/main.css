@@ -6,3 +6,10 @@
 .social-icons a:hover {
     text-decoration: none;
 }
+
+.profile-pic {
+    border-color: black;
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 1px;
+}
