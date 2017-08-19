@@ -6,40 +6,65 @@
 <div class="sidebar" id="sidebar">
   <div class="sidebar-item">
     <img src="{{ site.github.repo }}/public/imgs/profilepic.jpg">
+  </div>
+
+  <div class="contact-list">
+    <a href="https://github.com/robgoyal">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-square-o fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x"></i>
+      </span>
+    </a>
+
+    <a href="https://www.linkedin.com/in/robingoyal">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-square-o fa-stack-2x"></i>
+        <i class="fa fa-linkedin fa-stack-1x"></i>
+      </span>
+    </a>
+
+    <a href="mailto:{{ site.author.email }}">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-square-o fa-stack-2x"></i>
+        <i class="fa fa-envelope fa-stack-1x"></i>
+      </span>
+    </a>
+
+    <a href="https://reddit.com/user/softwaregg">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-square-o fa-stack-2x"></i>
+        <i class="fa fa-reddit fa-stack-1x"></i>
+      </span>
+    </a>
+  </div>
+
+  <div class="sidebar-item">
     <p class="sidebar-description">{{ site.description }}</p>
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item{% if page.url == site.baseurl %} active{% endif %}" href="{{ site.baseurl }}/">Blog</a>
+      <a class="sidebar-nav-item{% if page.url == site.baseurl %} active{% endif %}" href="{{ site.baseurl }}/">Blog</a>
 
-    {% comment %}
-      The code below dynamically generates a sidebar nav of pages with
-      `layout: page` in the front-matter. See readme for usage.
-    {% endcomment %}
+      {% comment %}
+        The code below dynamically generates a sidebar nav of pages with
+        `layout: page` in the front-matter. See readme for usage.
+      {% endcomment %}
 
-    {% assign pages_list = site.pages | sort:"url" %}
-    {% for node in pages_list %}
-      {% if node.title != null %}
-        {% if node.layout == "page" %}
-          <a class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}" href="{{ node.url }}">{{ node.title }}</a>
+      {% assign pages_list = site.pages | sort:"url" %}
+      {% for node in pages_list %}
+        {% if node.title != null %}
+          {% if node.layout == "page" %}
+            <a class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}" href="{{ node.url }}">{{ node.title }}</a>
+          {% endif %}
         {% endif %}
-      {% endif %}
-    {% endfor %}
+      {% endfor %}
 
-    <a class="sidebar-nav-item" href="{{ site.github.repo }}/public/docs/resume_cv.pdf">Resume</a>
-    <!--<a class="sidebar-nav-item" href="{{ site.github.repo }}">GitHub project</a>
-    <span class="sidebar-nav-item">Currently v{{ site.version }}</span>-->
-  </nav>
+      <a class="sidebar-nav-item" href="{{ site.github.repo }}/public/docs/resume_cv.pdf">Resume</a>
+    </nav>
 
   <div class="sidebar-item">
-    <p class="social-icons">
-      <a href="https://github.com/robgoyal"><i class="fa fa-github fa-2x"></i></a>
-      <a href="https://www.linkedin.com/in/robingoyal"><i class="fa fa-linkedin fa-2x"></i></a>
-      <a href="mailto:goyal.rob@gmail.com"><i class="fa fa-envelope fa-2x"></i></a>
-      <a href="https://www.reddit.com/user/softwaregg/"><i class="fa fa-reddit fa-2x"></i></a>
-    </p>
-    <p>
-      &copy; {{ site.time | date: '%Y' }}. All rights reserved.
-    </p>
+      <p>
+        &copy; {{ site.time | date: '%Y' }}. All rights reserved.
+      </p>
   </div>
 </div>
