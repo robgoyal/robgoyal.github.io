@@ -1,3 +1,7 @@
+# Dependencies
+markdown: kramdown
+highlighter: rouge
+
 # Permalinks
 #
 # Use of `relative_permalinks` ensures post links from the index work properly.
@@ -23,8 +27,12 @@ author:
   linkedin:          robingoyal
   reddit:            softwaregg
 
+github:
+  repo:              https://robgoyal.github.io
+  
 # Custom vars
 version:             1.0.0
 
 # Excerpt Seperator
 excerpt_separator: <!--more-->
+
