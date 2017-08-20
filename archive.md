@@ -2,6 +2,7 @@
 layout: page
 title: Archive
 permalink: /archive/
+description: "An archive of posts sorted by year"
 ---
 
 ## Blog Posts

@@ -1,6 +1,8 @@
 ---
 layout: page
 title: About
+description: 
+permalink: /about/
 ---
 
 Hello and welcome to my blog! I am a software developer from self study and an aspiring engineering by education who loves to read, play video games and procastinate at working out. I will be interning at [General Dynamics Mission Systems](https://gdmissionsystems.com/) for the 2017 Fall term while actively looking for an internship for the January term as well. 
