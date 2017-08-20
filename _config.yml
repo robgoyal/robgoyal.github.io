@@ -14,7 +14,10 @@ description:         'Thoughts, discussions, and notes about the never ending jo
 url:                 http://robingoyal.tech
 baseurl:             ''
 
-gems:               [jekyll-paginate]
+gems:
+  - jekyll-paginate
+  - jekyll-seo-tag
+
 paginate:            3
 paginate_path:      "page:num"
 
