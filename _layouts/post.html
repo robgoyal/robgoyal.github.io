@@ -8,12 +8,12 @@ description: "layout for posts"
 <div class="post">
   <h1 class="post-title">{{ page.title }}</h1>
   <span class="post-date">{{ page.date | date_to_string }}</span>
-  <span class="post-tag-box" style="display:inline-block;">
+  <ul class="post-tag-box inline">
     {% for item in (0..page.tags.size) %}{% unless forloop.last %}
       {% capture this_word %}{{ tag_words[item] | strip_newlines }}{% endcapture %}
-     <a href="{{ site.url }}/tags/#{{ this_word | escape_cgi }}"><i class="fa fa-tags fa-rotate-90 fa-sm"></i>{{ this_word }}</a>
+     <li><a href="{{ site.url }}/tags/#{{ this_word | escape_cgi }}"><i class="fa fa-tags fa-rotate-90 fa-sm"></i>{{ this_word }}</a></li>
    {% endunless %}{% endfor %}
-  </span>
+  </ul>
   {{ content }}
 </div>
 
