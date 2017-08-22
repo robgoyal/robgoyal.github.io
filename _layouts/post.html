@@ -71,4 +71,19 @@ description: "layout for posts"
     {% endif %}
   {% endfor %}
 
+  {% if maxRelatedCounter == 0 %}
+    <ul class="related-posts">
+      {% for post in site.related_posts limit:maxRelated %}
+        <li>
+          <h3>
+            <a href="{{ site.baseurl }}{{ post.url }}">
+              {{ post.title }}
+              <small>{{ post.date | date_to_string }}</small>
+            </a>
+          </h3>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
 </div>
