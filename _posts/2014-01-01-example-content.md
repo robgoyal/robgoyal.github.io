@@ -2,7 +2,7 @@
 layout: post
 title: Example content
 comments: true
-tags: [robin, test, example]
+tags: [robin, test, example, intro]
 ---
 
 
