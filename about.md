@@ -11,10 +11,10 @@ I'm currently a student studying [Mechatronics Engineering](http://www.cas.mcmas
 
 # Contact
 
-<form id="form" class="topBefore">
+<form id="form" class="topBefore" action="https://formspree.io/goyal.rob@gmail.com" method="POST">
         
-          <input id="name" type="text" placeholder="NAME">
-          <input id="email" type="text" placeholder="E-MAIL">
+        <input id="name" type="text" name="name" placeholder="NAME">
+        <input id="email" type="text" name="_replyto" placeholder="E-MAIL">
         <textarea id="message" type="text" placeholder="MESSAGE"></textarea>
         <input id="submit" type="submit" value="Submit">
   
