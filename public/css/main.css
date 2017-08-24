@@ -118,3 +118,19 @@
   font-size: 0.75rem;
   line-height: 2.5;
 }
+
+/* Future opportunity to add image to about me page. 
+   Use .right class for the image and the row class for the
+   encapsulating div surrounding text and image. Add a div
+   with style=clear: both at end of text and image */
+
+/*.row {
+  display: block;
+}
+
+.right {
+  float: right;
+  height: 50%;
+  width: 50%;
+  padding: 20px;
+}*/
