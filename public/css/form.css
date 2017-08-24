@@ -1,77 +1,72 @@
 /* Form CSS from https://codepen.io/markmurray/pen/JsAhx/ */
 
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-  color: #aca49c;
+  color: #ac4142;
   font-size: 0.875em;
 }
 
 input:focus::-webkit-input-placeholder, textarea:focus::-webkit-input-placeholder {
-  color: #bbb5af;
+  color: #FFFFFF;
 }
 
 input::-moz-placeholder, textarea::-moz-placeholder {
-  color: #aca49c;
+  color: #ac4142;
   font-size: 0.875em;
 }
 
 input:focus::-moz-placeholder, textarea:focus::-moz-placeholder {
-  color: #bbb5af;
+  color: #FFFFFF;
 }
 
 input::placeholder, textarea::placeholder {
-  color: #aca49c;
+  color: #ac4142;
   font-size: 0.875em;
 }
 
 input:focus::placeholder, textarea::focus:placeholder {
-  color: #bbb5af;
+  color: #FFFFFF;
 }
 
 input::-ms-placeholder, textarea::-ms-placeholder {
-  color: #aca49c;
+  color: #ac4142;
   font-size: 0.875em;
 }
 
 input:focus::-ms-placeholder, textarea:focus::-ms-placeholder {
-  color: #bbb5af;
+  color: #FFFFFF;
 }
 
 /* on hover placeholder */
 
 input:hover::-webkit-input-placeholder, textarea:hover::-webkit-input-placeholder {
-  color: #e2dedb;
+  color: #000000;
   font-size: 0.875em;
 }
 
 input:hover:focus::-webkit-input-placeholder, textarea:hover:focus::-webkit-input-placeholder {
-  color: #cbc6c1;
+  color: #000000;
 }
 
 input:hover::-moz-placeholder, textarea:hover::-moz-placeholder {
-  color: #e2dedb;
+  color: #000000;
   font-size: 0.875em;
 }
 
 input:hover:focus::-moz-placeholder, textarea:hover:focus::-moz-placeholder {
-  color: #cbc6c1;
+  color: #000000;
 }
 
 input:hover::placeholder, textarea:hover::placeholder {
-  color: #e2dedb;
+  color: #000000;
   font-size: 0.875em;
 }
 
 input:hover:focus::placeholder, textarea:hover:focus::placeholder {
-  color: #cbc6c1;
-}
-
-input:hover::placeholder, textarea:hover::placeholder {
-  color: #e2dedb;
-  font-size: 0.875em;
+  color: #000000;
 }
 
 input:hover:focus::-ms-placeholder, textarea:hover::focus:-ms-placeholder {
-  color: #cbc6c1;
+  color: #000000;
 }
 
 #form {
@@ -100,8 +95,7 @@ input {
 }
 
 input:hover {
-  background: #b3aca7;
-  color: #e2dedb;
+  color: #000000;
 }
 
 textarea {
@@ -114,7 +108,7 @@ textarea {
   background: transparent;
   outline: none;
   
-  color: #726659;
+  color: #000000;
   font-size: 0.875em;
   
   border: solid 1px #000000;
@@ -126,8 +120,7 @@ textarea {
 }
 
 textarea:hover {
-  background: #b3aca7;
-  color: #e2dedb;
+  color: #000000;
 }
 
 #submit {
@@ -137,7 +130,7 @@ textarea:hover {
   margin: -7px 0px 0px 0px;
   
   font-size: 0.875em;
-  color: #b3aca7;
+  color: #ac4142;
   
   outline:none;
   cursor: pointer;
@@ -147,5 +140,5 @@ textarea:hover {
 }
 
 #submit:hover {
-  color: #e2dedb;
+  color: #000000;
 }
