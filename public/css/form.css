@@ -6,7 +6,7 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
 }
 
 input:focus::-webkit-input-placeholder, textarea:focus::-webkit-input-placeholder {
-  color: #FFFFFF;
+  color: #000000;
 }
 
 input::-moz-placeholder, textarea::-moz-placeholder {
@@ -15,7 +15,7 @@ input::-moz-placeholder, textarea::-moz-placeholder {
 }
 
 input:focus::-moz-placeholder, textarea:focus::-moz-placeholder {
-  color: #FFFFFF;
+  color: #000000;
 }
 
 input::placeholder, textarea::placeholder {
@@ -24,7 +24,7 @@ input::placeholder, textarea::placeholder {
 }
 
 input:focus::placeholder, textarea::focus:placeholder {
-  color: #FFFFFF;
+  color: #000000;
 }
 
 input::-ms-placeholder, textarea::-ms-placeholder {
@@ -33,7 +33,7 @@ input::-ms-placeholder, textarea::-ms-placeholder {
 }
 
 input:focus::-ms-placeholder, textarea:focus::-ms-placeholder {
-  color: #FFFFFF;
+  color: #000000;
 }
 
 /* on hover placeholder */
@@ -83,7 +83,7 @@ input {
   
   background: transparent;
   outline: none;
-  color: #000000;
+  color: #ac4142;
   
   border: solid 1px #000000;
   border-bottom: none;
@@ -108,7 +108,7 @@ textarea {
   background: transparent;
   outline: none;
   
-  color: #000000;
+  color: #ac4142;
   font-size: 0.875em;
   
   border: solid 1px #000000;
