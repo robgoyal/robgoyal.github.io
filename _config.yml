@@ -10,7 +10,7 @@ permalink:           "/blog/:title"
 # Setup
 title:               Robin Goyal
 tagline:             'Developer, Engineer, Student'
-description:         'Thoughts, discussions, and notes about the never ending journey in software development'
+description:         'The journey of a software developer in training'
 url:                 http://robingoyal.tech/
 baseurl:             ''
 
