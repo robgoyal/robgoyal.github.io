@@ -1,6 +1,7 @@
 ---
 layout: post
 title: What's Jekyll?
+description: Explanation of jekyll and its features
 comments: True
 tags: [test, robin, intro, template]
 description: explanation of what jekyll is

@@ -3,6 +3,7 @@ layout: post
 title: Example content
 comments: true
 tags: [robin, test, example, intro]
+description: Example content displaying markdown syntax
 ---
 
 

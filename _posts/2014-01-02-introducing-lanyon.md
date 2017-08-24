@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Introducing Lanyon
+description: Introduction to the features of the Lanyon theme
 comments: true
 tags: [cool, jekyll, html, css, python, languages, c, matlab, simulink]
 ---
