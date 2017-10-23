@@ -5,8 +5,6 @@ permalink: /archive/
 description: "An archive of posts sorted by year"
 ---
 
-## Blog Posts
-
 <section class="archive-post-list">
     {% for post in site.posts %}
         {% assign currentDate = post.date | date: "%Y" %}
@@ -16,7 +14,7 @@ description: "An archive of posts sorted by year"
             <ul>
             {% assign myDate = currentDate %}
         {% endif %}
-        <li>{{ post.date | date: "%B %-d, %Y" }} &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+        <li>{{ post.date | date_to_string }} &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
         {% if forloop.last %}</ul>{% endif %}
     {% endfor %}
 </section>
