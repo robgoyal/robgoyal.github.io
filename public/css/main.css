@@ -143,3 +143,10 @@
 .card-footer {
   background-color: #c0c0c0;
 }
+
+@media (max-width: 575px) {
+  .card {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
