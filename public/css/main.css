@@ -125,3 +125,21 @@
   font-size: 0.9em;
   font-style: italic;
 }
+
+/* Projects */
+.projects {
+  margin-top: 45px;
+}
+
+.project-button {
+  text-align: center;
+  margin: 0;
+}
+
+.card {
+  margin-bottom: 20px;
+}
+
+.card-footer {
+  background-color: #c0c0c0;
+}

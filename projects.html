@@ -5,10 +5,50 @@ decription: "Personal projects"
 permalink: /projects/
 ---
 
-<div id="project">
-  <a href="#" data-toggle="modal" data-target="#exampleModal">
-    <img src="{{ site.github.repo }}/public/imgs/profilepic.png"/>
-  </a>
+<div class="projects">
+  <div class="row">
+    <div class="card-deck">
+      
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title">Grade Informer</h2>
+          <p class="card-text">
+            A simple script designed to notify when exam marks are released.
+          </p>
+        </div>
+        <div class="card-footer">
+          <a href="#" class="btn btn-default btn-block project-button" role="button" data-toggle="modal" data-target="#exampleModal">Learn More</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title">Autobot</h4>
+          <p class="card-text">
+            A robot designed to move autonomously. This was designed using electrical, 
+            software, algorithms, etc.
+          </p>
+        </div>
+        <div class="card-footer">
+          <a href="#" class="btn btn-default btn-block project-button" role="button" data-toggle="modal" data-target="#exampleModal">Learn More</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title">Financial Simulator</h4>
+          <p class="card-text">
+            A fictional stock market which simulates values of current assets and real world
+            stock values.
+          </p>
+        </div>
+        <div class="card-footer">
+          <a href="#" class="btn btn-default btn-block project-button" role="button" data-toggle="modal" data-target="#exampleModal">Learn More</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
 
 <!-- Modal -->
@@ -22,7 +62,7 @@ permalink: /projects/
         </button>
       </div>
       <div class="modal-body">
-        <img style="width: 50%; height: 50%;" src="{{ site.github.repo }}/public/imgs/profilepic.png"/>
+        <img style="width: 50%; height: 50%;" src="{{ site.baseurl }}/public/imgs/sample.jpg"/>
         Name: Project 1
         Author: Robin Goyal
       </div>
@@ -33,3 +73,4 @@ permalink: /projects/
     </div>
   </div>
 </div>
+<!-- End Modal -->
