@@ -150,3 +150,37 @@
     margin-right: 20px;
   }
 }
+
+/* Modal */
+.modal-title {
+  width: 100%;
+  text-align: center;
+}
+
+.modal-img {
+  margin: 0 auto;
+  width: 70%;
+  height: 70%;
+}
+
+.project-info {
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 15px;
+}
+
+.project-info p {
+  margin-bottom: 5px;
+}
+
+.project-subheading {
+  font-weight: bold;
+}
+
+.project-subheading:after {
+  content: ": ";
+}
+
+.close {
+  color: #ac4142;
+}
