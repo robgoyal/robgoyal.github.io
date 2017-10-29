@@ -8,50 +8,55 @@ permalink: /projects/
 <div class="projects">
   <div class="row">
     <div class="card-deck">
-      
-      <div class="card">
-        <div class="card-body">
-          <h2 class="card-title">Grade Informer</h2>
-          <p class="card-text">
-            A simple script designed to notify when exam marks are released.
-          </p>
-        </div>
-        <div class="card-footer">
-          <a href="#" class="btn btn-default btn-block project-button" role="button" data-toggle="modal" data-target="#gradeinformer">Learn More</a>
-        </div>
-      </div>
 
+      <!-- Autonomous Robot Project -->
       <div class="card">
         <div class="card-body">
           <h2 class="card-title">Autobot</h4>
           <p class="card-text">
-            A robot designed to move autonomously. This was designed using electrical, 
-            software, algorithms, etc.
+            An autonomous robot which runs on the Raspberry Pi. 
           </p>
         </div>
         <div class="card-footer">
           <a href="#" class="btn btn-default btn-block project-button" role="button" data-toggle="modal" data-target="#autobot">Learn More</a>
         </div>
       </div>
+      <!-- End Autonomous Robot Project -->
 
+      <!-- Financial Simulator Project -->
       <div class="card">
         <div class="card-body">
           <h2 class="card-title">Financial Simulator</h4>
           <p class="card-text">
-            A fictional stock market which simulates values of current assets and real world
-            stock values.
+            A fictional stock market which displays assets of purchased stocks.
           </p>
         </div>
         <div class="card-footer">
-          <a href="#" class="btn btn-default btn-block project-button" role="button" data-toggle="modal" data-target="#exampleModal">Learn More</a>
+          <a href="#" class="btn btn-default btn-block project-button" role="button" data-toggle="modal" data-target="#finsim">Learn More</a>
         </div>
       </div>
+      <!-- End Financial Simulator Project -->
+      
+      <!-- Grade Informer Project -->
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title">Grade Informer</h2>
+          <p class="card-text">
+            A Python script to notify me once exam marks are released.
+          </p>
+        </div>
+        <div class="card-footer">
+          <a href="#" class="btn btn-default btn-block project-button" role="button" data-toggle="modal" data-target="#gradeinformer">Learn More</a>
+        </div>
+      </div>
+      <!-- End Grade Informer Project -->
 
     </div>
   </div>
 </div>
 
 <!-- Modals -->
+<!-- Grade Informer Modal-->
 <div class="modal fade" id="gradeinformer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -76,7 +81,9 @@ permalink: /projects/
     </div>
   </div>
 </div>
+<!-- End Grade Informer Modal -->
 
+<!-- Autobot Modal -->
 <div class="modal fade" id="autobot" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -87,16 +94,46 @@ permalink: /projects/
         </button>
       </div>
       <div class="modal-body">
-        <img class="modal-img" src="{{ site.baseurl }}/public/imgs/projects/gradeinformer.png"/>
+        <!--<img class="modal-img" src="{{ site.baseurl }}/public/imgs/projects/gradeinformer.png"/>-->
         <div class="project-info">
           <p><span class="project-subheading">Name</span>Autonomous Robot</p>
           <p><span class="project-subheading">Author</span> Robin Goyal</p>
-          <p><span class="project-subheading">Description</span> A basic autonomous robot desigend to move around independently through the use of ultrasonic sensors, stepper motors, DC motors, etc</p>
-          <p><span class="project-subheading">Tools</span>Python, Raspberry Pi, Electronic Components</p>
-          <p><span class="project-subheading">Source</span><a href="https://github.com/robgoyal/ScriptGod/tree/master/PythonScripts/GradeInformer">Github Repository</a></p>
+          <p><span class="project-subheading">Description</span> An robot which runs on the Raspberry Pi and moves around 
+            independently. This was accomplished through the use of ultrasonic sensors, stepper motor, DC motors, and breadboard.</p>
+          <p><span class="project-subheading">Tools</span>Python, Raspberry Pi, Electrical Components</p>
+          <!--<p><span class="project-subheading">Source</span><a href="">Github Repository</a></p>-->
         </div>
       </div>
     </div>
   </div>
 </div>
-<!-- End Modal -->
+<!-- End Autobot Modal -->
+
+
+<!-- Financial Simulator Modal -->
+<div class="modal fade" id="finsim" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Financial Simulator</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img class="modal-img" src="{{ site.baseurl }}/public/imgs/projects/finsim.png"/>
+        <div class="project-info">
+          <p><span class="project-subheading">Name</span>Financial Simulator</p>
+          <p><span class="project-subheading">Author</span> Robin Goyal</p>
+          <p><span class="project-subheading">Description</span>A financial simulator which allows users to view
+          stock history, transaction history, stock prices, and assets. This also allows users to register to the system
+          as well as logging in and logging out.</p>
+          <p><span class="project-subheading">Tools</span>Python, Flask, HTML, CSS, SQL</p>
+          <p><span class="project-subheading">Source</span><a href="https://github.com/robgoyal/Finance">Github Repository</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Financial Simulator Modal -->
+<!-- End Modals -->
