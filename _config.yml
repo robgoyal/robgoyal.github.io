@@ -14,7 +14,7 @@ description:         'Forever Googling'
 url:                 http://robingoyal.tech/
 baseurl:             ''
 
-gems: [jekyll-paginate]
+plugins: [jekyll-paginate]
 
 paginate:            3
 paginate_path:      "page:num"
