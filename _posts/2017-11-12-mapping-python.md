@@ -6,13 +6,13 @@ comments: True
 tags: [python, functional, introduction, map]
 ---
 
-Python supports many programming paradigms, one of which is functional programming. Without diving too deep into the intracacies of the functional programming paradigm, we'll discuss a key feature of functional programming which is maps.
+Python supports many programming paradigms, one of which is functional programming. Without diving too deep into the intricacies of the functional programming paradigm, we'll discuss a key feature of functional programming which is maps.
 
 <!--more-->
 
-Maps are a higher order function which applies a specific function to a list and returns a new list. This is useful when you want to apply a set of the same operations to all elements of a list.
+Maps are a higher order function which applies a function to a sequence and returns a `map` object with the function applied to each element of the sequence. This is useful when you want to apply a set of the same operations to all elements in the sequence.
 
-Let's look at some progressions of using the mapping concept to Python as well as some examples.
+Let's look at a steady progression of using the mapping concept to Python as well as some examples.
 
 ## Basic Python Mapping 
 
@@ -43,11 +43,11 @@ print(square_list([1, 2, 3, 4]), square)
 >>> [1, 4, 9, 16]
 ```
 
-The square_list function accepts two arguments, a list of numbers and a function to apply a number. It iterates over the list of numbers L and applies func to each element. The returned value from func is appended to an initialized list and that list is returned after all elements have been squared.
+The `square_list` function accepts two arguments, a list of numbers and a function, `square` to apply to each number. It iterates over the list of numbers `L` and applies `square` to each element. The returned value from func is appended to a list and that list is returned after all elements have been squared.
 
 ### Map function
 
-Python has a built in function called map which can perform the same functionality that the above example holds.
+Python has a built in function, `map` which can perform the same functionality that the above example holds.
 
 ```python
 def square(x):
@@ -62,7 +62,7 @@ result = list(map(square, [1, 2, 3, 4]))
 print(result)
 >>> [1, 4, 9, 16]
 ```
-The map function creates an iterator with the results of each element of the list squared. The list function creates a list from the iterator.
+`map` returns a map object with the results of each element of the list squared. The `list` function creates a list from the map object.
 
 The above example only applied a single input to the function passed as an argument to map. Let's look at an example with two inputs as an argument to the function. 
 
@@ -81,7 +81,7 @@ print(result)
 >>> [2, 20, 56]
 ```
 
-`multiply` takes two arguments and returns the multiplied values. This shows that we could pass two lists to `map` so long as the function passed to `map` as an argument takes two arguments. This extends to any number of iterators so long as the number of iterators matches the number of arguments in the function.
+`multiply` takes two arguments and returns the value of the two arguments multiplied. This shows that we could pass two sequences to `map` so long as the function passed to `map` accepts two arguments as well. This extends to a variable number of sequences passed to map only if the number of arguments to function is the same.
 
 ### Lambda Functions
 
@@ -93,9 +93,7 @@ print(result)
 >>> [1, 4, 9, 16]
 ```
 
-Lambda functions must be simple functions. 
-
-Lambda functions can also take multiple variables. 
+Lambda functions must be simple and are also able to accept multiple arguments. Below is an example of the `multiply` function being converted to a `lambda` expression. 
 
 ```python
 result = list(map(lambda x, y: x * y, [1, 4, 7], [2, 5, 8]))
