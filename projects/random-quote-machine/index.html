@@ -1,0 +1,71 @@
+---
+permalink: /projects/random-quote-machine/
+---
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Random Quote Machine</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font-Awesome CSS -->
+    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Personal CSS -->
+    <link href="resources/css/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div id="page-title">
+        <h1> Random Quote Machine </h1>
+      </div>
+
+      <div id="main">
+        <div id="content">
+          <blockquote>
+            <p id="quote">
+              <i class="fa fa-quote-left" aria-hidden="true"></i>
+                <span></span>
+              <i class="fa fa-quote-right" aria-hidden="true"></i>
+            </p>
+
+            <footer id="author"></footer>
+          </blockquote>
+        </div>
+
+        <div id="buttons">
+
+          <!-- Twitter button -->
+          <a id="twitter-share-button" class="btn btn-twitter"
+              target="_blank"
+              title="Tweet this quote!"
+              href="https://twitter.com/share?related=freeCodeCamp&hashtags=Quotes%2CfreeCodeCamp&text=">
+            <span class="fa fa-twitter fa-2x"></span>
+          </a>
+
+          <!-- New Quote button -->
+          <a id="btn-random-quote" class="btn btn-default" role="button" title="Click for a new quote!">
+            Random Quote
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- JQuery JS -->
+    <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Personal JS -->
+    <script src="resources/js/script.js"></script>
+  </body>

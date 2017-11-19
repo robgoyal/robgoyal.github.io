@@ -1,0 +1,76 @@
+/* Page styles */
+body {
+    background-color: black;
+}
+
+#main {
+    width: 50%;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 75px;
+
+}
+
+#page-title {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 75px;
+    text-align: center;
+    color: white;
+}
+
+/* Increase width of content for small screen devices */
+@media only screen and (max-width: 470px) {
+    #main, #page-title {
+        width: 100%;
+    }
+}
+
+/* Main content */
+#content {
+    padding: 10px;
+    padding-top: 20px;
+}
+
+#quote {
+    text-align: center;
+}
+
+#author {
+    float: right;
+}
+
+blockquote {
+    margin: 10px;
+    margin-left: 20px;
+}
+
+/* Buttons */
+#btn-random-quote {
+    float: right;
+    margin-right: 27px;
+    margin-top: 13px;
+    border-color: black;
+}
+
+#twitter-share-button {
+    color: black;
+    margin-top: 10px;
+    margin-left: 15px;
+}
+
+#buttons {
+    height: 70px;
+}
+
+/* Reduce margins for small screens */
+@media only screen and (max-width: 470px) {
+    #twitter-share-button {
+        margin-left: 0px;
+    }
+
+    #btn-random-quote {
+        margin-right: 10px;
+    }
+}
