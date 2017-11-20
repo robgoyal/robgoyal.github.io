@@ -54,10 +54,19 @@ blockquote {
     border-color: black;
 }
 
+#btn-random-quote:hover {
+    background-color: white;
+    opacity:0.5;
+}
+
 #twitter-share-button {
     color: black;
     margin-top: 10px;
     margin-left: 15px;
+}
+
+#twitter-share-button:hover {
+    opacity:0.5;
 }
 
 #buttons {

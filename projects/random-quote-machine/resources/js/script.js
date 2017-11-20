@@ -39,7 +39,7 @@ let UpdateQuote = function() {
         });
 
         // Append quote and author text to twitter button
-        let twitter_href = $("#twitter-share-button").attr('href');
+        let twitter_href = "https://twitter.com/share?related=freeCodeCamp&hashtags=Quotes%2CfreeCodeCamp&text=";
         href_text = encodeURIComponent(quote) + encodeURIComponent(' - ') + encodeURIComponent(author);
         $("#twitter-share-button").attr("href", twitter_href + href_text);
     });
