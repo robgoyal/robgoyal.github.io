@@ -136,6 +136,9 @@
   margin: 0;
 }
 
+.card-deck {
+  margin-bottom: 30px;
+}
 .card {
   margin-bottom: 20px;
 }
@@ -148,6 +151,10 @@
   .card {
     margin-left: 20px;
     margin-right: 20px;
+  }
+
+  .card-deck {
+    margin-bottom:0px;
   }
 }
 

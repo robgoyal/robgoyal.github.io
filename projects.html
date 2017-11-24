@@ -53,6 +53,43 @@ permalink: /projects/
 
     </div>
   </div>
+
+  <div class="row">
+    <div class="card-deck">
+
+      <!-- Spotify Save Project -->
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title">SpotiSave</h4>
+          <p class="card-text">
+            An Python script to log all Spotify tracks to an excel file.
+          </p>
+        </div>
+        <div class="card-footer">
+          <a href="#" class="btn btn-default btn-block project-button" role="button" data-toggle="modal" data-target="#spotisave">Learn More</a>
+        </div>
+      </div>
+      <!-- End Spotify Save Project -->
+
+      <!-- Random Quote Machine Project -->
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title">Random Quote Machine</h4>
+          <p class="card-text">
+            Single page website to display random quotes.
+          </p>
+        </div>
+        <div class="card-footer">
+          <a href="#" class="btn btn-default btn-block project-button" role="button" data-toggle="modal" data-target="#rqm">Learn More</a>
+        </div>
+      </div>
+      <!-- End Random Quote Machine Project -->
+
+      <!-- SpotiSave Project -->
+      <!-- End SpotiSave Project -->
+
+    </div>
+  </div>
 </div>
 
 <!-- Modals -->
@@ -109,7 +146,6 @@ permalink: /projects/
 </div>
 <!-- End Autobot Modal -->
 
-
 <!-- Financial Simulator Modal -->
 <div class="modal fade" id="finsim" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -136,4 +172,55 @@ permalink: /projects/
   </div>
 </div>
 <!-- End Financial Simulator Modal -->
+
+<!-- SpotiSave API Modal -->
+<div class="modal fade" id="spotisave" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">SpotiSave</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img class="modal-img" src="{{ site.baseurl }}/public/imgs/projects/spotisave.png"/>
+        <div class="project-info">
+          <p><span class="project-subheading">Name</span>SpotiSave</p>
+          <p><span class="project-subheading">Author</span> Robin Goyal</p>
+          <p><span class="project-subheading">Description</span>A Python script which logs information to an excel file regarding track name, album, artists, date added, track url, and track id of all saved songs from my Spotify Account.</p>
+          <p><span class="project-subheading">Tools</span>Python, Spotify Api</p>
+          <p><span class="project-subheading">Source</span><a href="https://github.com/robgoyal/SpotiSave">Github Repository</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End SpotiSave Api Modal -->
+
+<!-- Random Quote Machine Modal -->
+<div class="modal fade" id="rqm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Random Quote Machine</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img class="modal-img" src="{{ site.baseurl }}/public/imgs/projects/rqm.png"/>
+        <div class="project-info">
+          <p><span class="project-subheading">Name</span>Random Quote Machine</p>
+          <p><span class="project-subheading">Author</span> Robin Goyal</p>
+          <p><span class="project-subheading">Description</span>A single page website which displays random quotes using an API. Dynamic changes and transitions are displayed upon page load or subsequent button clicks. An option to tweet the quote is also possible.</p>
+          <p><span class="project-subheading">Tools</span>HTML, CSS, Javascript, JQuery</p>
+          <p><span class="project-subheading">Link</span><a href="{{ site.baseurl }}/projects/random-quote-machine/">Project Site</a></p>
+          <p><span class="project-subheading">Source</span><a href="https://github.com/robgoyal/SpotiSave">Github Repository</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Random Quote Machine Modal -->
 <!-- End Modals -->
