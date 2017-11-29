@@ -1,0 +1,45 @@
+---
+permalink: /projects/local-weather
+---
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Local Weather</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Personal CSS -->
+    <link href="resources/css/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="container center">
+
+      <div id="title"><h1>FCC Weather App</h1></div>
+      <div id="content">
+        <!-- Animation while content loads -->
+        <p class="loading">Loading </p>
+        <!-- Weather information -->
+        <p id="location"></p>
+        <img id="weather-icon" />
+        <p id="description"></p>
+        <p id="temperature"></p>
+      </div>
+
+    </div>
+
+    <!-- JQuery JS -->
+    <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
+
+    <!-- Personal JS -->
+    <script src="resources/js/script.js"></script>
+  </body>
+</html>
