@@ -16,7 +16,7 @@ baseurl:             ''
 
 plugins: [jekyll-paginate]
 
-paginate:            3
+paginate:            4
 paginate_path:      "page:num"
 
 # About/contact
@@ -30,7 +30,7 @@ author:
 
 github:
   repo:              https://robgoyal.github.io
-  
+
 # Custom vars
 version:             1.0.0
 
