@@ -11,7 +11,7 @@ permalink:           "/blog/:title"
 title:               Robin Goyal
 tagline:             'Developer, Engineer, Student'
 description:         'Forever Googling'
-url:                 http://robingoyal.tech/
+url:                 https://rgoyal.ca
 baseurl:             ''
 
 plugins: [jekyll-paginate]
@@ -22,7 +22,7 @@ paginate_path:      "page:num"
 # About/contact
 author:
   name:              Robin Goyal
-  url:               http://www.robingoyal.tech
+  url:               https://rgoyal.ca
   email:             goyal.rob@gmail.com
   github:            robgoyal
   linkedin:          robingoyal
