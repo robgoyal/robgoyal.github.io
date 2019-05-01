@@ -1,13 +1,13 @@
 ---
 layout: page
-title: About
+title: About Me
 description:
 permalink: /about/
 ---
 
 <p> Check out my blog for ramblings on what I'm learning, interested in, travelling to, etc. This is a blog about anything and everything!</p>
 
-<p> More about me, I have recently graduate from McMaster University as a Mechatronics Engineering student. I am a self taught software developer and am working full time as a Software Systems Analyst for the Government of Canada. </p>
+<p> More about me, I have recently graduated from McMaster University as a Mechatronics Engineering student. I am a self taught software developer and am working full time as a Software Systems Analyst for the Government of Canada. </p>
 
 <p> I am always aspiring to be a better developer, friend and overall, a better individual. Speaking to that, I'll end it off with one of my favorite quotes. </p>
 
