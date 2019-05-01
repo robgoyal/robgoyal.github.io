@@ -12,7 +12,7 @@ permalink: /about/
 <p> I am always aspiring to be a better developer, friend and overall, a better individual. Speaking to that, I'll end it off with one of my favorite quotes. </p>
 
 <blockquote>Chase excellence, and success will follow!</blockquote>
-<cite>3 Idiots</cite>
+<cite>- Rancho from 3 Idiots</cite>
 
 <!-- <p>I am working as a Software Developer for the Government of Canada. 
 
