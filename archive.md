@@ -14,7 +14,7 @@ description: "An archive of posts sorted by year"
             <ul>
             {% assign myDate = currentDate %}
         {% endif %}
-        <li>{{ post.date | date_to_string }} &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+        <li><span class="monospace-date">{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
         {% if forloop.last %}</ul>{% endif %}
     {% endfor %}
 </section>

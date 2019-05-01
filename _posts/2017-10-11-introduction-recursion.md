@@ -28,7 +28,7 @@ The base case will cause the function to exit if it is met. If the base case is 
 
 Calculating the [factorial](https://en.wikipedia.org/wiki/Factorial) of a number can be achieved using recursion. Any value that is passed to the function which is greater than 1 will reach the recursive case, where each function call will eventually reach the base case. 
 
-```python
+{% highlight python %}
 def factorial(n):
 
     # Base case
@@ -39,7 +39,7 @@ def factorial(n):
     return n * factorial(n - 1)
 
 factorial(5)
-```
+{% endhighlight %}
 
 The expected return value from factorial (5) should be 120 since 5*4*3*2*1 = 120. 
 Going through a sample walkthrough of how this works should make it more clear. Using an example input of 5, the factorial of 5 is 5 x 4 x 3 x 2 x 1 = 120. 
@@ -55,7 +55,7 @@ In the first call of the function, the base case is not met so we call the facto
 ### Iteration vs Recursion
 Iteration is very similar to recursion but it doesn't require any function calls. The same recursive function for the factorial problem can be written as an iterative solution as well. 
 
-```python
+{% highlight python %}
 def factorial(n):
     
     # Initialize variable to hold product 
@@ -68,7 +68,7 @@ def factorial(n):
     return product
 
 factorial(5)
-```
+{% endhighlight %}
 
 This is an equivalent function in recursion but requires some extra steps such as initializing a variable, defining a range for the iteration, and performing the product calculation. 
 

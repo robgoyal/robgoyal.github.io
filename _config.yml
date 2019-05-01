@@ -9,8 +9,8 @@ permalink:           "/blog/:title"
 
 # Setup
 title:               Robin Goyal
-tagline:             'Developer, Engineer, Student'
-description:         'Forever Googling'
+tagline:             'Software Developer'
+description:         'Forever Learning'
 url:                 https://rgoyal.ca
 baseurl:             ''
 

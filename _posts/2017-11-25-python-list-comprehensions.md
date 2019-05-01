@@ -47,12 +47,12 @@ Let's break down this syntax:
 The following is an example of retrieving the even digits from an input sequence. Since we are checking to see if the digit is even, we require a conditional expression. We'll look at solutions which use a for loop, map and list comprehensions
 ##### For Loop
 
-```python
+{% highlight python %}
 even_values = []
 for x in input_sequence:
     if x % 2 == 0:
         even_values.append(x)
-```
+{% endhighlight %}
 
 ##### Map
 
