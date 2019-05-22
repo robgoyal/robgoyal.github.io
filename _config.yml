@@ -11,7 +11,7 @@ permalink:           "/blog/:title"
 title:               Robin Goyal
 tagline:             'Software Developer'
 description:         'Forever Learning'
-url:                 https://rgoyal.ca
+url:                 https://robingoyal.com
 baseurl:             ''
 
 plugins: [jekyll-paginate]
@@ -22,8 +22,8 @@ paginate_path:      "page:num"
 # About/contact
 author:
   name:              Robin Goyal
-  url:               https://rgoyal.ca
-  email:             goyal.rob@gmail.com
+  url:               https://robingoyal.com
+  email:             robin.goyal.swd@gmail.com
   github:            robgoyal
   linkedin:          robingoyal
   reddit:            softwaregg
