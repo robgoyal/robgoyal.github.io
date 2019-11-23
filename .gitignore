@@ -2,3 +2,4 @@ _site/
 *.sh
 _drafts/
 notes.md
+.idea/
