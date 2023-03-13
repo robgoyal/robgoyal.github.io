@@ -1,0 +1,413 @@
+<!DOCTYPE html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="day-prompt" content="days ago"><meta name="hour-prompt" content="hours ago"><meta name="minute-prompt" content="minutes ago"><meta name="justnow-prompt" content="just now"><meta name="generator" content="Jekyll v4.3.2" /><meta property="og:title" content="Configure a Raspberry Pi from scratch" /><meta name="author" content="Robin Goyal" /><meta property="og:locale" content="en" /><meta name="description" content="Earlier this year, I converted my old desktop into a Proxmox server (you’re probably wondering why I’m talking about Proxmox on a post discussing the Raspberry Pi but we’ll get there) in an effort to offload the work of virtualizing VM’s on my devices. Whether it was a development VM or a Kali VM for my cybersecurity related activities, I was creating and managing VM’s on multiple devices. Setting up the Proxmox server resulted in a one-stop-shop for all of my VM’s and being able to remotely access them using Tailscale." /><meta property="og:description" content="Earlier this year, I converted my old desktop into a Proxmox server (you’re probably wondering why I’m talking about Proxmox on a post discussing the Raspberry Pi but we’ll get there) in an effort to offload the work of virtualizing VM’s on my devices. Whether it was a development VM or a Kali VM for my cybersecurity related activities, I was creating and managing VM’s on multiple devices. Setting up the Proxmox server resulted in a one-stop-shop for all of my VM’s and being able to remotely access them using Tailscale." /><link rel="canonical" href="https://robgoyal.github.io/posts/configure-raspberry-pi-from-scratch/" /><meta property="og:url" content="https://robgoyal.github.io/posts/configure-raspberry-pi-from-scratch/" /><meta property="og:site_name" content="Robin Goyal" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2022-11-12T11:00:00-05:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="Configure a Raspberry Pi from scratch" /><meta name="google-site-verification" content="google_meta_tag_verification" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Robin Goyal"},"dateModified":"2023-03-12T21:29:10-04:00","datePublished":"2022-11-12T11:00:00-05:00","description":"Earlier this year, I converted my old desktop into a Proxmox server (you’re probably wondering why I’m talking about Proxmox on a post discussing the Raspberry Pi but we’ll get there) in an effort to offload the work of virtualizing VM’s on my devices. Whether it was a development VM or a Kali VM for my cybersecurity related activities, I was creating and managing VM’s on multiple devices. Setting up the Proxmox server resulted in a one-stop-shop for all of my VM’s and being able to remotely access them using Tailscale.","headline":"Configure a Raspberry Pi from scratch","mainEntityOfPage":{"@type":"WebPage","@id":"https://robgoyal.github.io/posts/configure-raspberry-pi-from-scratch/"},"url":"https://robgoyal.github.io/posts/configure-raspberry-pi-from-scratch/"}</script><title>Configure a Raspberry Pi from scratch | Robin Goyal</title><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="Robin Goyal"><meta name="application-name" content="Robin Goyal"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://fonts.gstatic.com"><link rel="preconnect" href="https://www.google-analytics.com" crossorigin="use-credentials"><link rel="dns-prefetch" href="https://www.google-analytics.com"><link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="preconnect" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css"><link rel="stylesheet" href="/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css"> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script><body data-spy="scroll" data-target="#toc"><div id="sidebar" class="d-flex flex-column align-items-end" lang="en"><div class="profile-wrapper text-center"><div id="avatar"> <a href="/" alt="avatar" class="mx-auto"> <img src="/assets/img/profilepic.png" alt="avatar" onerror="this.style.display='none'"> </a></div><div class="site-title mt-3"> <a href="/">Robin Goyal</a></div><div class="site-subtitle font-italic">Software Developer & Cybersecurity Enthusiast</div></div><ul class="w-100"><li class="nav-item"> <a href="/" class="nav-link"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>HOME</span> </a><li class="nav-item"> <a href="/about/" class="nav-link"> <i class="fa-fw fas fa-info ml-xl-3 mr-xl-3 unloaded"></i> <span>ABOUT</span> </a><li class="nav-item"> <a href="/categories/" class="nav-link"> <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i> <span>CATEGORIES</span> </a><li class="nav-item"> <a href="/archives/" class="nav-link"> <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i> <span>ARCHIVES</span> </a><li class="nav-item"> <a href="/tags/" class="nav-link"> <i class="fa-fw fas fa-tags ml-xl-3 mr-xl-3 unloaded"></i> <span>TAGS</span> </a></ul><div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center"> <a href="/resume.pdf" aria-label="resume" class="order-3" > <i class="fas fa-file-alt"></i> </a> <a href="https://github.com/robgoyal" aria-label="github" class="order-4" target="_blank" rel="noopener"> <i class="fab fa-github-alt"></i> </a> <a href=" javascript:location.href = 'mailto:' + ['robin.goyal.swd','gmail.com'].join('@')" aria-label="email" class="order-5" > <i class="fas fa-envelope"></i> </a> <a href="https://www.linkedin.com/in/robingoyal" aria-label="linkedin" class="order-6" target="_blank" rel="noopener"> <i class="fab fa-linkedin"></i> </a> <span class="icon-border order-2"></span> <span id="mode-toggle-wrapper" class="order-1"> <i class="mode-toggle fas fa-adjust"></i> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return "mode"; } static get DARK_MODE() { return "dark"; } static get LIGHT_MODE() { return "light"; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } var self = this; /* always follow the system prefers */ this.sysDarkPrefers.addListener(function() { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.updateMermaid(); }); } /* constructor() */ setDark() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { $('html').removeAttr(ModeToggle.MODE_KEY); sessionStorage.removeItem(ModeToggle.MODE_KEY); } get sysDarkPrefers() { return window.matchMedia("(prefers-color-scheme: dark)"); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode == ModeToggle.DARK_MODE; } get isLightMode() { return this.mode == ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer) ) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } updateMermaid() { if (typeof mermaid !== "undefined") { let expectedTheme = (this.modeStatus === ModeToggle.DARK_MODE? "dark" : "default"); let config = { theme: expectedTheme }; /* re-render the SVG › <https://github.com/mermaid-js/mermaid/issues/311#issuecomment-332557344> */ $(".mermaid").each(function() { let svgCode = $(this).prev().children().html(); $(this).removeAttr("data-processed"); $(this).html(svgCode); }); mermaid.initialize(config); mermaid.init(undefined, ".mermaid"); } } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.updateMermaid(); } /* flipMode() */ } /* ModeToggle */ let toggle = new ModeToggle(); $(".mode-toggle").click(function() { toggle.flipMode(); }); </script> </span></div></div><div id="topbar-wrapper" class="row justify-content-center topbar-down"><div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between"> <span id="breadcrumb"> <span> <a href="/"> Home </a> </span> <span>Configure a Raspberry Pi from scratch</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Search..."> <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i> </span> <span id="search-cancel" >Cancel</span></div></div><div id="main-wrapper"><div id="main"><div class="row"><div id="post-wrapper" class="col-12 col-lg-11 col-xl-8"><div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><h1 data-toc-skip>Configure a Raspberry Pi from scratch</h1><div class="post-meta text-muted d-flex flex-column"><div> <span class="semi-bold"> Robin Goyal </span> on <span class="timeago " data-toggle="tooltip" data-placement="bottom" title="Sat, Nov 12, 2022, 11:00 AM -0500" >Nov 12, 2022<i class="unloaded">2022-11-12T11:00:00-05:00</i> </span></div><div> <span> Updated <span class="timeago lastmod" data-toggle="tooltip" data-placement="bottom" title="Sun, Mar 12, 2023, 9:29 PM -0400" >Mar 12<i class="unloaded">2023-03-12T21:29:10-04:00</i> </span> </span> <span class="readtime" data-toggle="tooltip" data-placement="bottom" title="3664 words">20 min read</span></div></div><div class="post-content"> <img data-proofer-ignore data-src="https://www.vectorlogo.zone/logos/raspberrypi/raspberrypi-ar21.png" class="preview-img" alt="Preview Image" ><p>Earlier this year, I converted my old desktop into a Proxmox server (you’re probably wondering why I’m talking about Proxmox on a post discussing the Raspberry Pi but we’ll get there) in an effort to offload the work of virtualizing VM’s on my devices. Whether it was a development VM or a Kali VM for my cybersecurity related activities, I was creating and managing VM’s on multiple devices. Setting up the Proxmox server resulted in a one-stop-shop for all of my VM’s and being able to remotely access them using Tailscale.</p><p>Unfortunately, the old desktop I had was limiting in resources and the Proxmox instance was shutting down or rebooting several times in a day. Like the lazy technical engineer I am, I decided to buy a server off of EBay that a coworker recommended with greater resources and an Intel Xeon CPU (dedicated for servers?). Ideally, I would love to build a homelab with rack-mounted hardware but I am cheap at the moment so this will do. This post and subsequent posts will bring you on my journey of setting up a homelab from scratch. The posts may not be in an order that make sense but we’ll start with configuring a Raspberry Pi.</p><h2 id="raspberry-pi">Raspberry Pi</h2><p>Why the Raspberry Pi? One, I had it lying around and thought I’d make use of it. Two, my coworker (the same one who recommended the EBay server) mentioned that he set up Proxmox Backup Server (PBS) as a Docker container on the Raspberry Pi. PBS is a storage option to backup VM’s from Proxmox Virtual Environment (PVE) nodes on a regular schedule and restore them onto any node. This is similar to VMWare or VirtualBox’s snapshot ability and being able to restore them but on steroids. This also meant I could back up the VM’s from my old desktop hardware onto the newly purchased server hardware.</p><p>In your case, you might want to install the Pi for any number of reasons. Potentially as a Minecraft server? Satisfactory server? Linux computer to practice your skills? The sky’s the limit. The steps here might be skewed towards my purpose but cherry pick whatever you think you’ll need. I’ll document how to configure the Raspberry Pi without any peripherals required other than your laptop as well as:</p><ul><li>networking<li>authentication (password and SSH keys)<li>docker<li>mounting an external storage device</ul><p>With that, let’s get started.</p><h2 id="raspberry-pi-imager">Raspberry Pi Imager</h2><p>The Raspberry Pi foundation developed the Raspbery Pi Imager software <sup id="fnref:rpi-imager" role="doc-noteref"><a href="#fn:rpi-imager" class="footnote" rel="footnote">1</a></sup>, a fantastic tool to quickly install and flash the OS onto an SD card as well as configure the networking. Now, no longer shall we need peripherals to access the Raspberry Pi. So long as you have an SSH client like Putty (Windows) or the native client on Linux and Unix devices, you’re golden.</p><p>Download the <a href="https://www.raspberrypi.com/software/">Imager</a>. I’ll be performing the following steps from a macOS computer but the steps should be similar.</p><p><img data-proofer-ignore data-src="/assets/img/posts/homelab-rpi-build/rpi-imager-download.jpg" alt="raspberry pi imager os download" /></p><p>Insert your SD card and launch the RPi imager software.</p><p><img data-proofer-ignore data-src="/assets/img/posts/homelab-rpi-build/rpi-imager-main-screen.jpg" alt="raspberry pi imager main menu" /></p><p>Select the OS that you’d like to install.</p><p><img data-proofer-ignore data-src="/assets/img/posts/homelab-rpi-build/rpi-imager-select-os.jpg" alt="raspberry pi imager menu os" /></p><p>For myself, I’m going to install the Raspberry Pi OS (64-bit) option. <strong>I made this mistake in a prior build but if you’re going to install 64-bit software, select the 64-bit OS option. I banged my head for hours trying to deploy PBS (64-bit software on 32-bit OS).</strong></p><p><img data-proofer-ignore data-src="/assets/img/posts/homelab-rpi-build/rpi-imager-select-os-64-bit.jpg" alt="raspberry pi imager menu os 64 bit" /></p><p>Next, select the SD card as the storage option to write the OS to.</p><p><img data-proofer-ignore data-src="/assets/img/posts/homelab-rpi-build/rpi-imager-select-storage.jpg" alt="raspberry pi imager select storage" /></p><p>Click on the gear icon for advanced options where we’ll configure the hostname, SSH configuration, and networking. I’m not sure on other OS’s but when you open the advanced options on Mac, you may be prompted to pre-fill the Wi-Fi password from your Keychain. Hit yes if you’d like.</p><p><img data-proofer-ignore data-src="/assets/img/posts/homelab-rpi-build/rpi-imager-advanced.jpg" alt="raspberry pi imager advanced menu" /></p><p>For the advanced menu options:</p><ul><li>hostname: set your hostname but write it down as you’ll need it to connect to the Pi without knowing the IP address. The Raspberry Pi OS comes preinstalled with Avahi which enables multicast DNS lookup<li>SSH: enable SSH and select one of the two options. If you don’t have public keys configured on your host, use password authentication and I will demonstrate closer to the bottom of the post how to generate SSH keys<li>Username and Password: configure the username and password for the Pi (if you select password authentication for SSH, you’ll need this)<li>Wireless LAN: your Wi-Fi SSID and password</ul><p>The rest of the options aren’t important but feel free to fill them in. Hit Save and Write.</p><p><img data-proofer-ignore data-src="/assets/img/posts/homelab-rpi-build/rpi-imager-warning.jpg" alt="raspberry pi imager warning" /></p><p>A prompt will appear warning you that the storage device will be overwritten. If you’re sure you selected the correct device, wipe it!</p><p><img data-proofer-ignore data-src="/assets/img/posts/homelab-rpi-build/rpi-imager-writing.jpg" alt="raspberry pi imager writing" /></p><p>This will take a few minutes to write to the SD card but once it’s completed, we can insert the SD card into the Raspberry Pi and the device will appear on the network after a few minutes.</p><p>SSH with your username@hostname and your password if you selected password authentication.</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre><td class="rouge-code"><pre>robinder@Robins-Mac-mini ~ % ssh robinder@pi.local
+The authenticity of host <span class="s1">'pi.local (2607:fea8:bde0:850::71c4)'</span> can<span class="s1">'t be established.
+ED25519 key fingerprint is SHA256:XpsYdI05dOdxBEsDVYfAA99GN/mRdT5+JrGb9P5f4ko.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '</span>pi.local<span class="s1">' (ED25519) to the list of known hosts.
+Linux pi 5.15.61-v8+ #1579 SMP PREEMPT Fri Aug 26 11:16:44 BST 2022 aarch64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Thu Sep 22 04:17:48 2022
+robinder@pi:~ $
+</span></pre></table></code></div></div><h2 id="configuring-your-pi">Configuring your Pi</h2><p>The first thing to do is update the repositories and upgrade our packages.</p><p><strong>Due to my previous shenanigans with my homelab, I pushed DNS servers for hosts that don’t exist. If you face this issue, you can manually update the DNS servers in your /etc/resolv.conf file. This configuration file is overwritten by the resolvctl service on reboots so I’ll also document how to configure DNS servers when we set a static IP for the Pi.</strong></p><p>Original configuration:</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span><span class="nb">cat</span> /etc/resolv.conf
+<span class="c"># Generated by resolvconf</span>
+domain ht.home
+nameserver ::1
+</pre></table></code></div></div><p>Updated configuration:</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span><span class="nb">cat</span> /etc/resolv.conf
+<span class="c"># Generated by resolvconf</span>
+domain ht.home
+nameserver 8.8.8.8
+</pre></table></code></div></div><p>Now, we can finally perform our <code class="language-plaintext highlighter-rouge">apt-get update</code> and <code class="language-plaintext highlighter-rouge">apt-get upgrade</code>.</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span><span class="nb">sudo </span>apt-get update
+Get:1 http://security.debian.org/debian-security bullseye-security InRelease <span class="o">[</span>48.4 kB]
+Hit:2 http://deb.debian.org/debian bullseye InRelease
+Get:3 http://deb.debian.org/debian bullseye-updates InRelease <span class="o">[</span>44.1 kB]
+Get:4 http://archive.raspberrypi.org/debian bullseye InRelease <span class="o">[</span>23.6 kB]
+Get:5 http://security.debian.org/debian-security bullseye-security/main armhf Packages <span class="o">[</span>192 kB]
+Get:6 http://security.debian.org/debian-security bullseye-security/main arm64 Packages <span class="o">[</span>192 kB]
+Get:7 http://security.debian.org/debian-security bullseye-security/main Translation-en <span class="o">[</span>123 kB]
+Get:8 http://deb.debian.org/debian bullseye-updates/main armhf Packages <span class="o">[</span>12.0 kB]
+Get:9 http://deb.debian.org/debian bullseye-updates/main arm64 Packages <span class="o">[</span>12.0 kB]
+Get:10 http://deb.debian.org/debian bullseye-updates/main Translation-en <span class="o">[</span>7,929 B]
+Get:11 http://archive.raspberrypi.org/debian bullseye/main arm64 Packages <span class="o">[</span>299 kB]
+Get:12 http://archive.raspberrypi.org/debian bullseye/main armhf Packages <span class="o">[</span>308 kB]
+Fetched 1,261 kB <span class="k">in </span>2s <span class="o">(</span>649 kB/s<span class="o">)</span>
+Reading package lists... Done
+</pre></table></code></div></div><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span><span class="nb">sudo </span>apt-get upgrade
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Calculating upgrade... Done
+The following package was automatically installed and is no longer required:
+  libfuse2
+<span class="nt">---------------</span> TRIMMED OUTPUT <span class="nt">-----------------</span>
+</pre></table></code></div></div><p>Install the tools that you’d like! In my case, VIM!</p><h3 id="static-ip">Static IP</h3><p>This section is optional but I prefer to manage the IP addresses for my devices on the network. I would especially prefer to maintain a DHCP/DNS server but that is going to be future Robin’s problem.</p><p>To set a static IP address, we need four pieces of information:</p><ul><li>interface: usually <em>eth0</em> if connected through ethernet or <em>wlan0</em> if connected through Wi-Fi<li>router’s IP: usually your subnet with an octet ending in .1<li>DNS server(s) to use<li>desired static IP address</ul><p>Open <code class="language-plaintext highlighter-rouge">/etc/dhcpcd.conf</code> with your editor of choice</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span><span class="nb">sudo </span>vim /etc/dhcpcd.conf
+</pre></table></code></div></div><p>Append the following lines and substitute the parameters</p><div lang="plaintext" class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre>interface [INTERFACE]
+static ip_address=[IP ADDRESS]/24
+static routers=[ROUTER IP]
+static domain_name_servers=[DNS Servers]
+</pre></table></code></div></div><p>If the file contains uncommented lines related to a static IP configuration, remove them.</p><p>For my configuration, the added lines look like this.</p><div lang="plaintext" class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre>interface wlan0
+static ip_address=192.168.0.26/24
+static routers=192.168.0.1
+static domain_name_servers=8.8.8.8
+</pre></table></code></div></div><p>Now reboot the Pi for the changes to persist.</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span><span class="nb">sudo </span>reboot
+</pre></table></code></div></div><p><em>Unclear why but my Pi didn’t reboot and remained in the off state. I had remove and plug in the power cable for it to power back on.</em></p><p>After SSHing back onto the Pi, verify the IP address for the interface.</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span>ip <span class="nt">--brief</span> a
+lo               UNKNOWN        127.0.0.1/8 ::1/128
+eth0             DOWN
+wlan0            UP             192.168.0.26/24 2607:fea8:bde0:850::71c4/128
+</pre></table></code></div></div><p>Great! If we exit from the SSH session and connect over the IP address, we should connect in the same fashion as we SSH’d via the hostname.</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre><td class="rouge-code"><pre>robinder@Robins-Mac-mini ~ % ssh robinder@192.168.0.26
+The authenticity of host <span class="s1">'192.168.0.26 (192.168.0.26)'</span> can<span class="s1">'t be established.
+ED25519 key fingerprint is SHA256:XpsYdI05dOdxBEsDVYfAA99GN/mRdT5+JrGb9P5f4ko.
+This host key is known by the following other names/addresses:
+    ~/.ssh/known_hosts:1: pi.local
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '</span>192.168.0.26<span class="s1">' (ED25519) to the list of known hosts.
+Linux pi 5.15.76-v8+ #1597 SMP PREEMPT Fri Nov 4 12:16:41 GMT 2022 aarch64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Fri Nov 11 16:49:47 2022 from 192.168.0.68
+</span></pre></table></code></div></div><p><em>As I verified the IP address, I noticed that <code class="language-plaintext highlighter-rouge">/etc/resolv.conf</code> did not update with the DNS servers I specified in the <code class="language-plaintext highlighter-rouge">dhcpcd.conf</code> file. Listing out the configuration that resolvctf was reading <code class="language-plaintext highlighter-rouge">sudo resolvconf -l</code>, the contents of <code class="language-plaintext highlighter-rouge">resolv.conf</code> was from the wlan0.dhcp6 interface but the configuration I specified in <code class="language-plaintext highlighter-rouge">dhcpcd.conf</code> was listed in the wlan0.dhcp interface. After some trial and error, I disabled ipv6 which fixed the issue.</em></p><p>To disable IPv6, add the following lines to <code class="language-plaintext highlighter-rouge">/etc/sysctl.conf</code>. <strong>At this point, you are modifying kernel variables so tread carefully.</strong></p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre>net.ipv6.conf.all.disable_ipv6 <span class="o">=</span> 1
+net.ipv6.conf.default.disable_ipv6 <span class="o">=</span> 1
+net.ipv6.conf.lo.disable_ipv6 <span class="o">=</span> 1
+</pre></table></code></div></div><p>Execute</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span><span class="nb">sudo </span>sysctl <span class="nt">-p</span>
+</pre></table></code></div></div><p>which should list the lines you added to <code class="language-plaintext highlighter-rouge">sysctl.conf</code>. Now if you execute</p><div lang="plaintext" class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>robinder@pi:~ $ sudo cat /proc/sys/net/ipv6/conf/all/disable_ipv6
+1
+</pre></table></code></div></div><p>Reboot the Pi again and verify the DNS servers in <code class="language-plaintext highlighter-rouge">/etc/resolv.conf</code>.</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span><span class="nb">cat</span> /etc/resolv.conf
+<span class="c"># Generated by resolvconf</span>
+nameserver 8.8.8.8
+</pre></table></code></div></div><p>Finally! And now we can move on from configuring our IP address.</p><h3 id="docker">Docker</h3><p>Installing Docker is incredibly simple thanks a Bash script that will install all of the requirements for us.</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span>curl <span class="nt">-sSL</span> https://get.docker.com | sh
+</pre></table></code></div></div><p>After the script has executed, we need to add the Pi user to the Docker group. Without this, the Pi user can’t execute docker comands.</p><p>Our current groups does not contain docker</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span><span class="nb">groups</span> | <span class="nb">grep</span> <span class="nt">-o</span> docker
+robinder@pi:~ <span class="err">$</span>
+</pre></table></code></div></div><p>Add the user to the group</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span><span class="nb">sudo </span>usermod <span class="nt">-aG</span> docker robinder
+</pre></table></code></div></div><p>Logout for the changes to take effect</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span><span class="nb">logout
+</span>Connection to pi.local closed.
+</pre></table></code></div></div><p>Checking the groups again</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span><span class="nb">groups</span> | <span class="nb">grep</span> <span class="nt">-o</span> docker
+docker
+</pre></table></code></div></div><p>We should be able to run docker commands without being root. Docker provides a hello-world repository to verify if your docker installation functioned.</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span>docker run hello-world
+Unable to find image <span class="s1">'hello-world:latest'</span> locally
+latest: Pulling from library/hello-world
+7050e35b49f5: Pull <span class="nb">complete
+</span>Digest: sha256:faa03e786c97f07ef34423fccceeec2398ec8a5759259f94d99078f264e9d7af
+Status: Downloaded newer image <span class="k">for </span>hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+</pre></table></code></div></div><p>Listing out all stopped and running containers</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span>docker ps <span class="nt">-a</span>
+CONTAINER ID   IMAGE         COMMAND    CREATED              STATUS                          PORTS     NAMES
+a6809696ef10   hello-world   <span class="s2">"/hello"</span>   About a minute ago   Exited <span class="o">(</span>0<span class="o">)</span> About a minute ago             zealous_lehmann
+</pre></table></code></div></div><p>Remove the exited container</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span>docker <span class="nb">rm </span>zealous_lehmann
+zealous_lehmann
+</pre></table></code></div></div><p>Remove the hello-world image</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span>docker image <span class="nb">ls
+</span>REPOSITORY    TAG       IMAGE ID       CREATED        SIZE
+hello-world   latest    46331d942d63   7 months ago   9.14kB
+robinder@pi:~ <span class="nv">$ </span>docker image <span class="nb">rm </span>hello-world
+Untagged: hello-world:latest
+Untagged: hello-world@sha256:faa03e786c97f07ef34423fccceeec2398ec8a5759259f94d99078f264e9d7af
+Deleted: sha256:46331d942d6350436f64e614d75725f6de3bb5c63e266e236e04389820a234c4
+Deleted: sha256:efb53921da3394806160641b72a2cbd34ca1a9a8345ac670a85a04ad3d0e3507
+</pre></table></code></div></div><h3 id="attaching-an-external-storage-device">Attaching an External Storage Device</h3><p>Once again, this section is optional.</p><p>If the external storage device is not plugged in, attach it now and use the <code class="language-plaintext highlighter-rouge">lsblk</code> command to identify the device name.</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span>lsblk <span class="nt">-f</span>
+NAME        FSTYPE FSVER LABEL  UUID                                 FSAVAIL FSUSE% MOUNTPOINT
+sda
+└─sda1      ext4   1.0          b4881f35-5b06-47b4-842c-df9ee8c82b43    3.4T     1% /media/robinder/b4881f35-5b06-47b4-842c-df9ee8c82b43
+mmcblk0
+├─mmcblk0p1 vfat   FAT32 boot   3772-58CD                             223.2M    12% /boot
+└─mmcblk0p2 ext4   1.0   rootfs ee7f279a-1fe9-4c98-9f3c-83c7173683b7   23.9G    13% /
+</pre></table></code></div></div><p>The device I attached is located at <code class="language-plaintext highlighter-rouge">/dev/sda1</code> and it has been automounted to <code class="language-plaintext highlighter-rouge">/media</code> but we can modify this. The <code class="language-plaintext highlighter-rouge">mmcblk0</code> device is the SD card with the flashed Pi OS. Keep in mind, these ID’s may be different for you.</p><p>Another way to view the devices attached to your Pi is with the <code class="language-plaintext highlighter-rouge">blkid</code> command</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span>blkid
+/dev/mmcblk0p1: <span class="nv">LABEL_FATBOOT</span><span class="o">=</span><span class="s2">"boot"</span> <span class="nv">LABEL</span><span class="o">=</span><span class="s2">"boot"</span> <span class="nv">UUID</span><span class="o">=</span><span class="s2">"3772-58CD"</span> <span class="nv">BLOCK_SIZE</span><span class="o">=</span><span class="s2">"512"</span> <span class="nv">TYPE</span><span class="o">=</span><span class="s2">"vfat"</span> <span class="nv">PARTUUID</span><span class="o">=</span><span class="s2">"be42dfe6-01"</span>
+/dev/mmcblk0p2: <span class="nv">LABEL</span><span class="o">=</span><span class="s2">"rootfs"</span> <span class="nv">UUID</span><span class="o">=</span><span class="s2">"ee7f279a-1fe9-4c98-9f3c-83c7173683b7"</span> <span class="nv">BLOCK_SIZE</span><span class="o">=</span><span class="s2">"4096"</span> <span class="nv">TYPE</span><span class="o">=</span><span class="s2">"ext4"</span> <span class="nv">PARTUUID</span><span class="o">=</span><span class="s2">"be42dfe6-02"</span>
+/dev/sda1: <span class="nv">UUID</span><span class="o">=</span><span class="s2">"b4881f35-5b06-47b4-842c-df9ee8c82b43"</span> <span class="nv">BLOCK_SIZE</span><span class="o">=</span><span class="s2">"4096"</span> <span class="nv">TYPE</span><span class="o">=</span><span class="s2">"ext4"</span> <span class="nv">PARTUUID</span><span class="o">=</span><span class="s2">"8189959c-d280-4a40-9d4a-6334d64319de"</span>
+</pre></table></code></div></div><p>Since my storage device has been automounted, I need to unmount it first.</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span><span class="nb">sudo </span>umount /media/robinder/b4881f35-5b06-47b4-842c-df9ee8c82b43
+</pre></table></code></div></div><p>Using the <code class="language-plaintext highlighter-rouge">lsblk</code> command again</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span>lsblk <span class="nt">-f</span>
+NAME        FSTYPE FSVER LABEL  UUID                                 FSAVAIL FSUSE% MOUNTPOINT
+sda
+└─sda1      ext4   1.0          b4881f35-5b06-47b4-842c-df9ee8c82b43
+mmcblk0
+├─mmcblk0p1 vfat   FAT32 boot   3772-58CD                             223.2M    12% /boot
+└─mmcblk0p2 ext4   1.0   rootfs ee7f279a-1fe9-4c98-9f3c-83c7173683b7   23.9G    13% /
+</pre></table></code></div></div><p>There’s no mountpoint for <code class="language-plaintext highlighter-rouge">/dev/sda1</code>. Before specifying a mountpoint for the storage device, make a directory for where you want to mount it.</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span><span class="nb">sudo mkdir</span> /mnt/externalhdd
+</pre></table></code></div></div><p>Mount the storage device there</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span><span class="nb">sudo </span>mount /dev/sda1 /mnt/externalhdd
+</pre></table></code></div></div><p>There’s no output but if you have files on the storage device previously, list the contents of the directory to verify that it mounted correctly.</p><p><code class="language-plaintext highlighter-rouge">lsblk</code> once again</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span>lsblk <span class="nt">-f</span>
+NAME        FSTYPE FSVER LABEL  UUID                                 FSAVAIL FSUSE% MOUNTPOINT
+sda
+└─sda1      ext4   1.0          b4881f35-5b06-47b4-842c-df9ee8c82b43    3.4T     1% /mnt/externalhdd
+mmcblk0
+├─mmcblk0p1 vfat   FAT32 boot   3772-58CD                             223.2M    12% /boot
+└─mmcblk0p2 ext4   1.0   rootfs ee7f279a-1fe9-4c98-9f3c-83c7173683b7   23.9G    13% /
+</pre></table></code></div></div><p><strong>Manually mounting the device will not persist across reboots unless we add it to the <code class="language-plaintext highlighter-rouge">/etc/fstab</code> file.</strong></p><p>The format of the <code class="language-plaintext highlighter-rouge">fstab</code> file is:</p><div lang="plaintext" class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>&lt;file system&gt; &lt;mount point&gt; &lt;type&gt; &lt;options&gt; &lt;dump&gt; &lt;pass&gt;
+</pre></table></code></div></div><p>These columns represent <sup id="fnref:fstab-format" role="doc-noteref"><a href="#fn:fstab-format" class="footnote" rel="footnote">2</a></sup>:</p><ul><li><strong>Filesystem</strong> : you can either specify a UUID (for universal unique identifier), a label (if you chose a label for your disk), a network ID or a device name (which is not recommended at all);<li><strong>Mountpoint</strong> : the directory on the filesystem that you are going to use in order to access data stored on the disk;<li><strong>Filesystem type</strong> : the type of filesystem you use to <a href="https://devconnected.com/how-to-format-disk-partitions-on-linux/">format your disk</a>;<li><strong>Options</strong> : some options that you can specify in order to tune your mount (“ro” for a read-only mount or “noexec” to prevent binary execution);<li><strong>Dump</strong> : in order to enable to disable filesystem dumping on the system (using the dump command);<li><strong>Pass Num</strong> : sets the order used in order for the “fsck” utility to check your filesystem. If you are not mounting the root device, you should set this option to “2” or “0” as “1” is reserved for the root device.</ul><p>For myself, the entry in the fstab file look like</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span><span class="nb">tail</span> <span class="nt">-1</span> /etc/fstab
+<span class="nv">UUID</span><span class="o">=</span>b4881f35-5b06-47b4-842c-df9ee8c82b43 /mnt/externalhdd ext4 defaults 0 2
+</pre></table></code></div></div><p>The UUID is obtained from the output of the <code class="language-plaintext highlighter-rouge">lsblk</code> or <code class="language-plaintext highlighter-rouge">blkid</code> command. The mountpoint is where to mount the device, and the type is an <code class="language-plaintext highlighter-rouge">ext4</code> filesystem that I found from the output of the <code class="language-plaintext highlighter-rouge">lsblk</code>/<code class="language-plaintext highlighter-rouge">blkid</code> commands. The remaining options I set as defaults.</p><p>Close and save the file. If we reboot the system, our device should be mounted to our specified mountpoint.</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span>lsblk <span class="nt">-f</span>
+NAME        FSTYPE FSVER LABEL  UUID                                 FSAVAIL FSUSE% MOUNTPOINT
+sda
+└─sda1      ext4   1.0          b4881f35-5b06-47b4-842c-df9ee8c82b43    3.4T     1% /mnt/externalhdd
+mmcblk0
+├─mmcblk0p1 vfat   FAT32 boot   3772-58CD                             223.2M    12% /boot
+└─mmcblk0p2 ext4   1.0   rootfs ee7f279a-1fe9-4c98-9f3c-83c7173683b7   23.9G    13% /
+</pre></table></code></div></div><h3 id="ssh-key-authentication">SSH Key authentication</h3><p>SSH keys are more secure than password based authentication and more convenient. If you don’t have an SSH key configured on your Mac or Linux system, then continue on. I apologize in advance if you use Windows.</p><p><strong>The previous sections of the article, I used my Mac Mini to write the Raspberry Pi OS to the SD card and the SSH key I added originally was from the Mac Mini. The following section describing how to generate the SSH key will float between my Macbook and the Raspberry Pi.</strong></p><p>When configuring the SD card, if you did not use public key authentication or even if you did but want to add additional keys, generate the key-pair using <code class="language-plaintext highlighter-rouge">ssh-keygen</code>.</p><p>If using the default options for the command, just press <Enter> until complete or provide values for the options.</Enter></p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre>robinder@macbook ~ % ssh-keygen
+Generating public/private rsa key pair.
+Enter file <span class="k">in </span>which to save the key <span class="o">(</span>/Users/robinder/.ssh/id_rsa<span class="o">)</span>:
+Enter passphrase <span class="o">(</span>empty <span class="k">for </span>no passphrase<span class="o">)</span>:
+Enter same passphrase again:
+Your identification has been saved <span class="k">in</span> /Users/robinder/.ssh/id_rsa
+Your public key has been saved <span class="k">in</span> /Users/robinder/.ssh/id_rsa.pub
+</pre></table></code></div></div><p>Use the <code class="language-plaintext highlighter-rouge">ssh-copy-id</code> command to copy the public key file to the Raspberry Pi user.</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre><td class="rouge-code"><pre>robinder@macbook ~ % ssh-copy-id <span class="nt">-i</span> ~/.ssh/id_rsa.pub robinder@pi.local
+/usr/bin/ssh-copy-id: INFO: Source of key<span class="o">(</span>s<span class="o">)</span> to be installed: <span class="s2">"/Users/robinder/.ssh/id_rsa.pub"</span>
+The authenticity of host <span class="s1">'pi.local (192.168.0.26)'</span> can<span class="s1">'t be established.
+ED25519 key fingerprint is SHA256:XpsYdI05dOdxBEsDVYfAA99GN/mRdT5+JrGb9P5f4ko.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+robinder@pi.local: Permission denied (publickey).
+</span></pre></table></code></div></div><p><strong>I potentially expected this error to occur for myself. If you specified public-key authentication, follow the steps on the Raspberry Pi and your host computer to solve this issue.</strong></p><p>On the Pi, execute the following command.</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span><span class="nb">grep </span>PasswordAuthentication /etc/ssh/sshd_config
+PasswordAuthentication no
+</pre></table></code></div></div><p>Since we specified public-key authentication and not password authentication in the first step to write the OS to the SD card, this will be set to no. When I tried to copy the public key from the Macbook to the Pi, the Pi switched to password authentication since no public/private key pair matched. With password authentication disabled, we can’t copy keys unless we enable password authentication or copy and paste it into the <code class="language-plaintext highlighter-rouge">authorized_keys</code> file.</p><p>Change the value to yes and restart the SSHD service.</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span><span class="nb">grep </span>PasswordAuthentication /etc/ssh/sshd_config
+PasswordAuthentication <span class="nb">yes
+</span>robinder@pi:~ <span class="nv">$ </span><span class="nb">sudo </span>service sshd restart
+</pre></table></code></div></div><p>If I run the command from the Macbook again</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre><td class="rouge-code"><pre>robinder@macbook ~ % ssh-copy-id <span class="nt">-i</span> ~/.ssh/id_rsa.pub robinder@pi.local
+/usr/bin/ssh-copy-id: INFO: Source of key<span class="o">(</span>s<span class="o">)</span> to be installed: <span class="s2">"/Users/robinder/.ssh/id_rsa.pub"</span>
+/usr/bin/ssh-copy-id: INFO: attempting to log <span class="k">in </span>with the new key<span class="o">(</span>s<span class="o">)</span>, to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key<span class="o">(</span>s<span class="o">)</span> remain to be installed <span class="nt">--</span> <span class="k">if </span>you are prompted now it is to <span class="nb">install </span>the new keys
+robinder@pi.local<span class="s1">'s password:
+
+Number of key(s) added:        1
+
+Now try logging into the machine, with:   "ssh '</span>robinder@pi.local<span class="s1">'"
+and check to make sure that only the key(s) you wanted were added.
+</span></pre></table></code></div></div><p>If I SSH from the Macbook now</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre>robinder@macbook ~ % ssh robinder@pi.local
+Linux pi 5.15.76-v8+ <span class="c">#1597 SMP PREEMPT Fri Nov 4 12:16:41 GMT 2022 aarch64</span>
+
+The programs included with the Debian GNU/Linux system are free software<span class="p">;</span>
+the exact distribution terms <span class="k">for </span>each program are described <span class="k">in </span>the
+individual files <span class="k">in</span> /usr/share/doc/<span class="k">*</span>/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Fri Nov 11 18:06:52 2022 from 192.168.0.68
+robinder@pi:~ <span class="err">$</span>
+</pre></table></code></div></div><p>Amazing! Disable the password authentication and restart the service if needed.</p><h2 id="backup">Backup</h2><p>The last thing I would recommend is to backup the SD card to your computer. This behaves as a very weak snapshotting system but better than nothing.</p><p>First, shutdown the Pi.</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>robinder@pi:~ <span class="nv">$ </span><span class="nb">sudo </span>shutdown now
+</pre></table></code></div></div><p>Remove the SD card and insert it into your computer. The following instructions will be completed on the Mac Mini so use the appropriate software on your system to copy byte for byte from an SD card.</p><p>List the attached devices</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre>robinder@Robins-Mac-mini ~ % diskutil list
+/dev/disk4 <span class="o">(</span>external, physical<span class="o">)</span>:
+   <span class="c">#:                       TYPE NAME                    SIZE       IDENTIFIER</span>
+   0:     FDisk_partition_scheme                        <span class="k">*</span>31.9 GB    disk4
+   1:             Windows_FAT_32 ⁨boot⁩                    268.4 MB   disk4s1
+   2:                      Linux ⁨⁩                        31.6 GB    disk4s2
+</pre></table></code></div></div><p>I removed other devices from the list but the Pi boot partition is named as <code class="language-plaintext highlighter-rouge">Windows_FAT_32 boot</code> and has the name <code class="language-plaintext highlighter-rouge">/dev/disk4</code>. Your device names may be different.</p><p>To copy the contents of the disk to a file, use the dd command.</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>robinder@Robins-Mac-mini ~ % <span class="nb">sudo dd </span><span class="k">if</span><span class="o">=</span>/dev/disk4 <span class="nv">of</span><span class="o">=</span>./Backups/PI/20221111_piSDCardBackup.dmg
+</pre></table></code></div></div><p>This will take some time as the entire 32 GB SD card is being written. Once it’s written, eject the SD card safely.</p><p>If we wanted to restore the SD card from our back, use the following commands.</p><div lang="bash" class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>robinder@Robins-Mac-mini ~ % diskutil unmountDisk /dev/disk4
+robinder@Robins-Mac-mini ~ % <span class="nb">sudo dd </span><span class="k">if</span><span class="o">=</span>./Backups/PI/20221111_piSDCardBackup.dmg <span class="nv">of</span><span class="o">=</span>/dev/disk4
+</pre></table></code></div></div><p>Eject the SD card safely and insert into the Pi to pick up from your last save.</p><h2 id="conclusion">Conclusion</h2><p>This was a long post but I shared my journey of addressing issues as I encountered them which many posts do not do.</p><p>In future posts (hopefully shorter), I will document the steps to configure other software for the Pi or other parts of my home lab. At the end of this post, you should have a functioning Pi that is ready for any tasks you assign it.</p><h2 id="references">References</h2><div class="footnotes" role="doc-endnotes"><ol><li id="fn:rpi-imager" role="doc-endnote"><p><a href="https://www.raspberrypi.com/software/">https://www.raspberrypi.com/software/</a> <a href="#fnref:rpi-imager" class="reversefootnote" role="doc-backlink">&#8617;</a></p><li id="fn:fstab-format" role="doc-endnote"><p><a href="https://devconnected.com/how-to-mount-and-unmount-drives-on-linux/">https://devconnected.com/how-to-mount-and-unmount-drives-on-linux/</a> <a href="#fnref:fstab-format" class="reversefootnote" role="doc-backlink">&#8617;</a></p></ol></div></div><div class="post-tail-wrapper text-muted"><div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href='/categories/homelab/'>Homelab</a></div><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"> This post is licensed under <a href="https://creativecommons.org/licenses/by/4.0/"> CC BY 4.0 </a> by the author.</div><div class="share-wrapper"> <span class="share-label text-muted mr-1">Share</span> <span class="share-icons"> <a href="https://twitter.com/intent/tweet?text=Configure a Raspberry Pi from scratch - Robin Goyal&url=https://robgoyal.github.io/posts/configure-raspberry-pi-from-scratch/" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=Configure a Raspberry Pi from scratch - Robin Goyal&u=https://robgoyal.github.io/posts/configure-raspberry-pi-from-scratch/" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://robgoyal.github.io/posts/configure-raspberry-pi-from-scratch/" data-toggle="tooltip" data-placement="top" title="Linkedin" target="_blank" rel="noopener" aria-label="Linkedin"> <i class="fa-fw fab fa-linkedin"></i> </a> <i class="fa-fw fas fa-link small" onclick="copyLink('', 'Link copied successfully!')" data-toggle="tooltip" data-placement="top" title="Copy link"> </i> </span></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 pl-2 text-muted topbar-down"><div class="access"><div id="access-lastmod" class="post"> <span>Recent Update</span><ul class="post-content pl-0 pb-1 ml-1 mt-2"><li><a href="/posts/configure-raspberry-pi-from-scratch/">Configure a Raspberry Pi from scratch</a><li><a href="/posts/pbs-rpi/">Proxmox Backup Server on Raspberry Pi</a><li><a href="/posts/thm-basic-pentesting/">Basic Pentesting (Try Hack Me)</a><li><a href="/posts/thm-gamezone/">Gamezone (Try Hack Me)</a><li><a href="/posts/thm-overpass/">Overpass (Try Hack Me)</a></ul></div><div id="access-tags"> <span>Trending Tags</span><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/writeup/">writeup</a> <a class="post-tag" href="/tags/ctf/">ctf</a> <a class="post-tag" href="/tags/thm/">thm</a> <a class="post-tag" href="/tags/privesc/">privesc</a> <a class="post-tag" href="/tags/web-application/">web application</a> <a class="post-tag" href="/tags/ejpt/">eJPT</a> <a class="post-tag" href="/tags/ftp/">ftp</a> <a class="post-tag" href="/tags/reverse-shell/">reverse shell</a> <a class="post-tag" href="/tags/brute-force/">brute force</a> <a class="post-tag" href="/tags/ine/">INE</a></div></div></div><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.js"></script><div id="toc-wrapper" class="pl-0 pr-4 mb-5"> <span class="pl-3 pt-2 mb-2">Contents</span><nav id="toc" data-toggle="toc"></nav></div></div></div><div class="row"><div class="col-12 col-lg-11 col-xl-8"><div id="post-extend-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><div id="related-posts" class="mt-5 mb-2 mb-sm-4"><h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>Further Reading</h3><div class="card-deck mb-4"><div class="card"> <a href="/posts/pbs-rpi/"><div class="card-body"> <span class="timeago small" >Nov 13, 2022<i class="unloaded">2022-11-13T13:00:00-05:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>Proxmox Backup Server on Raspberry Pi</h3><div class="text-muted small"><p> This is my second post in a series of blog posts (in no particular order) to build my homelab. These posts and this homelab will be a living being connected to myself. As I grow and learn more abou...</p></div></div></a></div><div class="card"> <a href="/posts/create-vm-proxmox/"><div class="card-body"> <span class="timeago small" >Mar 1<i class="unloaded">2023-03-01T14:00:00-05:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>Creating my first Linux VM in Proxmox</h3><div class="text-muted small"><p> It’s been a few months since I have worked on my home lab but after learning about Cloudflare Tunnels, it has reinvigorated the youth in me to tackle this problem again. Over the next couple of blo...</p></div></div></a></div><div class="card"> <a href="/posts/cloudflare-tunnels-with-npm/"><div class="card-body"> <span class="timeago small" >Mar 11<i class="unloaded">2023-03-11T11:00:00-05:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>Set up Cloudflare tunnels with Nginx Proxy Manager</h3><div class="text-muted small"><p> Recently, I learned about Cloudflare tunnels and how you can safely expose your internal services without opening any ports on your router and I was mindblown! In this post, I’ll show how to set up...</p></div></div></a></div></div></div><div class="post-navigation d-flex justify-content-between"> <a href="/posts/thm-mrrobot/" class="btn btn-outline-primary" prompt="Older"><p>Mr. Robot (Try Hack Me)</p></a> <a href="/posts/pbs-rpi/" class="btn btn-outline-primary" prompt="Newer"><p>Proxmox Backup Server on Raspberry Pi</p></a></div></div></div></div><footer class="d-flex w-100 justify-content-center"><div class="d-flex justify-content-between align-items-center"><div class="footer-left"><p class="mb-0"> © 2023 <a href="https://github.com/robgoyal">Robin Goyal</a>. <span data-toggle="tooltip" data-placement="top" title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span></p></div><div class="footer-right"><p class="mb-0"></p></div></div></footer></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-sm-11 post-content"><div id="search-hints"><h4 class="text-muted mb-4">Trending Tags</h4><a class="post-tag" href="/tags/writeup/">writeup</a> <a class="post-tag" href="/tags/ctf/">ctf</a> <a class="post-tag" href="/tags/thm/">thm</a> <a class="post-tag" href="/tags/privesc/">privesc</a> <a class="post-tag" href="/tags/web-application/">web application</a> <a class="post-tag" href="/tags/ejpt/">eJPT</a> <a class="post-tag" href="/tags/ftp/">ftp</a> <a class="post-tag" href="/tags/reverse-shell/">reverse shell</a> <a class="post-tag" href="/tags/brute-force/">brute force</a> <a class="post-tag" href="/tags/ine/">INE</a></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a> <script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.7.3/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="https://robgoyal.github.io{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">Oops! No result founds.</p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script> <script src="https://cdn.jsdelivr.net/combine/npm/lozad/dist/lozad.min.js,npm/magnific-popup@1/dist/jquery.magnific-popup.min.js"></script> <script defer src="/assets/js/dist/post.min.js"></script> <script src="https://cdn.jsdelivr.net/combine/npm/popper.js@1.16.1,npm/bootstrap@4/dist/js/bootstrap.min.js"></script> <script defer src="/app.js"></script> <script defer src="https://www.googletagmanager.com/gtag/js?id="></script> <script> document.addEventListener("DOMContentLoaded", function(event) { window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', ''); }); </script>
