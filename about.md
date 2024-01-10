@@ -3,10 +3,6 @@ layout: page
 title: About
 ---
 
-<h3> Important Links </h3>
-
-- [Github](https://github.com/robgoyal)
-- [LinkedIn](https://www.linkedin.com/in/robingoyal)
 
 <h3> whoami </h3>
 
