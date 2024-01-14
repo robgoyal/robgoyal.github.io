@@ -33,10 +33,9 @@ image:
 ## Privilege Escalation
 
 
-## Useful Commands
-
-
 ## Reflection
+
+### Useful Commands
 
 
 ### Killchain Summary

@@ -10,6 +10,8 @@ image:
 
 ![](/assets/img/htb-banner.png)
 
+Soccer is an easy difficulty Linux machine that features a foothold based on default credentials, forfeiting access to a vulnerable version of the `Tiny File Manager`, which in turn leads to a reverse shell on the target system (`CVE-2021-45010`). Enumerating the target reveals a subdomain which is vulnerable to a blind SQL injection through websockets. Leveraging the SQLi leads to dumped `SSH` credentials for the `player` user, who can run `dstat` using `doas`- an alternative to `sudo`. By creating a custom `Python` plugin for `doas`, a shell as `root` is then spawned through the `SUID` bit of the `doas` binary, leading to fully escalated privileges.[^htb-link]
+
 <img src="{{ page.image.src }}" style="margin-right: 40px; margin-left: 20px; zoom: 50%;" align=left />    	
 
 ### {{ page.title }}
@@ -469,6 +471,7 @@ This box was rated for an easy difficulty but myself and a good chunk of players
 
 ## References
 
+[^htb-link]: <https://www.hackthebox.com/machines/soccer>
 [^upgrade-reverse-shell]: <https://blog.ropnop.com/upgrading-simple-shells-to-fully-interactive-ttys/>
 [^sql-over-websockets]: <https://rayhan0x01.github.io/ctf/2021/04/02/blind-sqli-over-websocket-automation.html>
 [^gtfobins]: <https://gtfobins.github.io/gtfobins/dstat/>
